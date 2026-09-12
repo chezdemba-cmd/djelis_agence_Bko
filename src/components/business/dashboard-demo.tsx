@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { dashboardKpiOrder, dashboardQuestions } from "@/data/djelis-business";
+import { LogoMark } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
 
 export function DashboardDemo() {
@@ -33,9 +34,7 @@ export function DashboardDemo() {
 
       <div className="mb-5.5 bg-white text-navy shadow-[0_0_0_1px_rgba(22,40,58,0.14)]">
         <div className="flex flex-wrap items-center gap-2.5 border-b border-navy/10 px-5 py-4">
-          <div className="flex h-6.5 w-6.5 flex-none items-center justify-center rounded-full bg-or font-display text-sm font-bold text-navy">
-            D
-          </div>
+          <LogoMark size={26} />
           <div className="min-w-[240px] flex-1 font-display text-[clamp(16px,2vw,21px)] font-semibold leading-[1.35]">
             {current.a}
           </div>

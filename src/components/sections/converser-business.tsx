@@ -173,9 +173,7 @@ export function ConverserBusiness() {
             >
               <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-navy/12 px-5 py-3.75">
                 <div className="flex items-center gap-2.25">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-or font-display text-[13px] font-bold text-navy">
-                    D
-                  </div>
+                  <LogoMark size={24} />
                   <span className="font-display text-sm font-semibold">
                     Djeli&apos;S Business
                   </span>

@@ -1,13 +1,16 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function LogoMark({ size = 30 }: { size?: number }) {
   return (
-    <div
-      className="flex flex-none items-center justify-center rounded-full bg-or font-display font-bold text-navy"
-      style={{ width: size, height: size, fontSize: size * 0.57 }}
-    >
-      D
-    </div>
+    <Image
+      src="/images/logo-icon.png"
+      alt=""
+      width={size}
+      height={size}
+      className="flex-none rounded-full"
+      style={{ width: size, height: size }}
+    />
   );
 }
 

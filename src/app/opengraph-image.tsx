@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/data/site";
 
@@ -6,6 +8,11 @@ export const contentType = "image/png";
 export const alt = "DJELI'S — IA, digital et technologies à Bamako";
 
 export default function OpengraphImage() {
+  const logoBase64 = readFileSync(
+    join(process.cwd(), "public/images/logo-icon.png"),
+  ).toString("base64");
+  const logoSrc = `data:image/png;base64,${logoBase64}`;
+
   return new ImageResponse(
     (
       <div
@@ -22,22 +29,17 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-          <div
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoSrc}
+            alt=""
             style={{
               width: 88,
               height: 88,
+              objectFit: "cover",
               borderRadius: "50%",
-              background: "#F5A623",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 48,
-              fontWeight: 700,
-              color: "#16283A",
             }}
-          >
-            D
-          </div>
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 44, fontWeight: 700, letterSpacing: -1 }}>
               DJELI&apos;S
