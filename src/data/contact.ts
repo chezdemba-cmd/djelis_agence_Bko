@@ -2,6 +2,7 @@ export const contactNeeds = [
   "Trouver des clients",
   "Vendre sur WhatsApp",
   "Créer des vidéos IA",
+  "Lancer des campagnes publicitaires",
   "Gérer mon commerce",
   "Automatiser mon entreprise",
   "Créer mon site ou mon application",
