@@ -39,8 +39,8 @@ export function Misconnected() {
         <Image
           src="/images/photo-02-pme-bureau.png"
           alt="Entrepreneur dans son bureau de PME à Bamako"
-          width={640}
-          height={853}
+          width={900}
+          height={1100}
           className="block aspect-3/4 w-full object-cover shadow-[0_0_0_1px_rgba(242,241,236,0.18)]"
         />
       </div>
