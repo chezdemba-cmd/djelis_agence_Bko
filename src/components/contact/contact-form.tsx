@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { contactNeeds, contactSectors } from "@/data/contact";
+import { submitContactForm } from "@/app/actions/contact";
 import { cn } from "@/lib/utils";
 
 type Step = 1 | 2 | 3;
@@ -20,6 +21,9 @@ export function ContactForm() {
   const [entreprise, setEntreprise] = useState("");
   const [telephone, setTelephone] = useState("");
   const [secteur, setSecteur] = useState(contactSectors[0]);
+  const [honeypot, setHoneypot] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const togglePicked = (i: number) => {
     setPicked((current) =>
@@ -39,6 +43,27 @@ export function ContactForm() {
     setEntreprise("");
     setTelephone("");
     setSecteur(contactSectors[0]);
+    setError(null);
+  };
+
+  const submit = () => {
+    setError(null);
+    startTransition(async () => {
+      const result = await submitContactForm({
+        needs: picked,
+        detail,
+        nom,
+        entreprise,
+        telephone,
+        secteur,
+        honeypot,
+      });
+      if (result.ok) {
+        setStep(3);
+      } else {
+        setError(result.error);
+      }
+    });
   };
 
   return (
@@ -178,18 +203,39 @@ export function ContactForm() {
               </select>
             </div>
           </div>
+
+          {/* honeypot — hidden from real users, catches simple bots */}
+          <input
+            type="text"
+            name="company_website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            className="sr-only"
+            aria-hidden="true"
+          />
+
+          {error ? (
+            <p className="mb-4 text-[13.5px] leading-relaxed text-[#F5A0A0]">
+              {error}
+            </p>
+          ) : null}
+
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
-              onClick={() => setStep(3)}
-              className="min-h-12 rounded-[2px] bg-or px-6.5 font-display text-sm font-semibold tracking-[0.03em] text-nuit transition-colors duration-150 hover:bg-or-hover"
+              onClick={submit}
+              disabled={isPending}
+              className="min-h-12 rounded-[2px] bg-or px-6.5 font-display text-sm font-semibold tracking-[0.03em] text-nuit transition-colors duration-150 hover:bg-or-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
-              ENVOYER MA DEMANDE
+              {isPending ? "ENVOI EN COURS…" : "ENVOYER MA DEMANDE"}
             </button>
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="min-h-12 border-b border-white/40 px-1.5 font-display text-sm font-semibold tracking-[0.03em] text-[#F2F1EC] transition-colors duration-150 hover:border-or hover:text-or"
+              disabled={isPending}
+              className="min-h-12 border-b border-white/40 px-1.5 font-display text-sm font-semibold tracking-[0.03em] text-[#F2F1EC] transition-colors duration-150 hover:border-or hover:text-or disabled:cursor-not-allowed disabled:opacity-60"
             >
               ← REVENIR
             </button>
