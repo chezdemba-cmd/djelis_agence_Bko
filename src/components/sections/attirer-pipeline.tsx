@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { pipelineSteps } from "@/data/homepage";
 import { Button } from "@/components/ui/button";
+import { PipelineMock } from "@/components/ui/pipeline-mock";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 export function AttirerPipeline() {
@@ -92,6 +93,11 @@ export function AttirerPipeline() {
                   alt="Photo produit prise en boutique"
                   className="mb-3.5 block aspect-9/16 max-h-[300px] w-full object-cover shadow-[0_0_0_1px_rgba(22,40,58,0.16)]"
                 />
+              ) : pipelineSteps[active].mock ? (
+                <PipelineMock
+                  type={pipelineSteps[active].mock!}
+                  className="max-h-[300px]"
+                />
               ) : (
                 <div className="mb-3.5 flex aspect-9/16 max-h-[300px] items-end bg-[repeating-linear-gradient(135deg,rgba(22,40,58,0.06)_0_8px,transparent_8px_16px)] p-3.5 shadow-[0_0_0_1px_rgba(22,40,58,0.16)]">
                   <span className="whitespace-pre-line font-mono text-[9.5px] leading-relaxed tracking-[0.06em] text-[#4A5B6B]">
@@ -165,6 +171,8 @@ export function AttirerPipeline() {
                       alt="Photo produit prise en boutique"
                       className="mb-3.5 block aspect-9/16 w-full object-cover shadow-[0_0_0_1px_rgba(22,40,58,0.16)]"
                     />
+                  ) : step.mock ? (
+                    <PipelineMock type={step.mock} />
                   ) : (
                     <div className="mb-3.5 flex aspect-9/16 items-end bg-[repeating-linear-gradient(135deg,rgba(22,40,58,0.06)_0_8px,transparent_8px_16px)] p-3 shadow-[0_0_0_1px_rgba(22,40,58,0.16)]">
                       <span className="whitespace-pre-line font-mono text-[9px] leading-relaxed tracking-[0.06em] text-[#4A5B6B]">

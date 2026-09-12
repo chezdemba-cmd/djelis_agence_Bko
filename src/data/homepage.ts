@@ -33,6 +33,7 @@ export type PipelineStep = {
   slot: string;
   video?: string;
   photo?: string;
+  mock?: "message" | "order";
 };
 
 export const pipelineSteps: PipelineStep[] = [
@@ -58,11 +59,13 @@ export const pipelineSteps: PipelineStep[] = [
     title: "Message reçu",
     body: "« Bonjour, j'ai vu votre vidéo. Le produit est encore disponible ? »",
     slot: "CAPTURE 02\nCONVERSATION WHATSAPP",
+    mock: "message",
   },
   {
     title: "Commande",
     body: "2 × modèle noir, 50 000 FCFA, livraison à Bamako.",
     slot: "CAPTURE 03\nCOMMANDE CONFIRMÉE",
+    mock: "order",
   },
 ];
 
