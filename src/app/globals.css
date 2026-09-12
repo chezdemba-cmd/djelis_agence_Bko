@@ -37,20 +37,22 @@
   --font-mono: var(--font-plex-mono), monospace;
 }
 
-body {
-  background: var(--color-nuit);
-  color: #f2f1ec;
-  font-family: var(--font-plex-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+@layer base {
+  body {
+    background: var(--color-nuit);
+    color: #f2f1ec;
+    font-family: var(--font-plex-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-::selection {
-  background: var(--color-or);
-  color: var(--color-nuit);
-}
+  ::selection {
+    background: var(--color-or);
+    color: var(--color-nuit);
+  }
 
-a {
-  color: inherit;
+  a {
+    color: inherit;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
